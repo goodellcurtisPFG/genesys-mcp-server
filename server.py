@@ -1,4 +1,5 @@
 """MCP server exposing a read-only slice of the Genesys Cloud Platform API.
+Built on the `mcp` SDK's MCPServer (mcp.server.mcpserver), formerly FastMCP.
 
 Run for interactive testing (opens the MCP Inspector web UI):
     mcp dev server.py
@@ -11,7 +12,7 @@ Or wire into Claude Code / another MCP client manually — see README.md.
 
 from __future__ import annotations
 
-from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
 
 from config import Settings
 from genesys_client import GenesysClient
@@ -19,7 +20,7 @@ from genesys_client import GenesysClient
 settings = Settings.from_env()
 client = GenesysClient(settings.client_id, settings.client_secret, settings.environment)
 
-mcp = FastMCP("genesys-cloud")
+mcp = MCPServer("genesys-cloud")
 
 
 @mcp.tool()
